@@ -1,0 +1,605 @@
+/* --- 全域變數與基礎設定 --- */
+:root {
+    --bg-color: #eaf6ff;       /* 天空藍背景 */
+    --surface-color: rgba(255, 255, 255, 0.82);  /* 卡片背景 */
+    --text-primary: #0d2140;   /* 深藍文字 */
+    --text-secondary: #526f92; /* 次要文字 */
+    --accent-color: #4dabff;   /* 天空藍 */
+    --accent-hover: #3b8cff;   /* 深天空藍 */
+    --accent-light: #a9daff;   /* 淺天空藍 */
+    --accent-glow: rgba(74, 144, 255, 0.16); /* 光暈 */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: none;
+}
+
+html {
+    scroll-behavior: smooth; /* 平滑滾動效果 */
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: linear-gradient(135deg, #e5f3ff 0%, #c8e7ff 55%, #dff1ff 100%);
+    background-attachment: fixed;
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 30%, rgba(255, 255, 255, 0.35) 0%, transparent 35%),
+                radial-gradient(circle at 80% 20%, rgba(74, 144, 255, 0.14) 0%, transparent 30%),
+                radial-gradient(circle at 50% 90%, rgba(255, 255, 255, 0.18) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* 自定義游標 */
+.cursor-dot {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background: var(--accent-color);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    box-shadow: 0 0 16px rgba(74, 171, 255, 0.6), 0 0 28px rgba(74, 171, 255, 0.35);
+    transform: translate(-50%, -50%);
+}
+
+.cursor-outline {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    border: 2px dashed rgba(74, 171, 255, 0.7);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    opacity: 0.65;
+    transition: width 0.2s ease, height 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+}
+
+.cursor-outline::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 80px;
+    height: 80px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    opacity: 0.25;
+    pointer-events: none;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* --- 導覽列 --- */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(16px); /* 毛玻璃效果 */
+    z-index: 100;
+    border-bottom: 1px solid rgba(74, 144, 255, 0.16);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+}
+
+.nav-brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent-color);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 24px;
+}
+
+.nav-links a {
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--accent-color);
+    transform: translateY(-2px);
+}
+
+/* --- 區塊共用設定 --- */
+.section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 70px; /* 避開固定導覽列 */
+}
+
+.section-title {
+    font-size: 2.5rem;
+    margin-bottom: 24px;
+    color: var(--text-primary);
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background-color: var(--accent-color);
+    margin-top: 8px;
+    border-radius: 2px;
+}
+
+/* --- Hero Section --- */
+.hero-title {
+    font-size: 4rem;
+    font-weight: 800;
+    margin-bottom: 16px;
+    line-height: 1.2;
+}
+
+.text-highlight {
+    color: var(--accent-color);
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+    margin-bottom: 40px;
+    max-width: 600px;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 16px;
+}
+
+/* --- 按鈕樣式 --- */
+.btn {
+    display: inline-block;
+    padding: 12px 32px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: var(--accent-color);
+    color: #fff;
+    border: 2px solid var(--accent-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-hover);
+    border-color: var(--accent-hover);
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--text-primary);
+    border: 2px solid var(--text-secondary);
+}
+
+.btn-outline:hover {
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+}
+
+/* --- About Section --- */
+.about-content {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 800px;
+}
+
+/* --- Contact Section --- */
+.contact-desc {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 40px;
+}
+
+.contact-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px;
+}
+
+.card {
+    background-color: var(--surface-color);
+    padding: 32px 24px;
+    border-radius: 12px;
+    text-align: center;
+    text-decoration: none;
+    color: var(--text-primary);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-color);
+}
+
+.card-icon {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 16px;
+}
+
+.card-text {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* --- Courses Section --- */
+.courses-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+.course-card {
+    background: linear-gradient(135deg, rgba(21, 33, 58, 0.8) 0%, rgba(30, 41, 59, 0.6) 100%);
+    padding: 24px;
+    border-radius: 12px;
+    border: 1px solid rgba(14, 165, 233, 0.2);
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+}
+
+.course-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(14, 165, 233, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.course-card:hover {
+    transform: scale(1.05) translateY(-12px);
+    border-color: var(--accent-color);
+    box-shadow: 0 20px 40px rgba(14, 165, 233, 0.2), 0 0 60px rgba(14, 165, 233, 0.1);
+}
+
+.course-card:hover::before {
+    left: 100%;
+}
+
+.course-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 12px;
+    gap: 12px;
+}
+
+.course-header h3 {
+    font-size: 1.2rem;
+    color: var(--text-primary);
+    flex: 1;
+}
+
+.course-category {
+    background-color: var(--accent-color);
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+}
+
+.course-semester {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+}
+
+.course-desc {
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+}
+
+.skills-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.skill-tag {
+    background-color: rgba(14, 165, 233, 0.1);
+    color: var(--accent-color);
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    border: 1px solid rgba(14, 165, 233, 0.3);
+}
+
+.course-link {
+    display: inline-block;
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.course-link:hover {
+    color: var(--accent-hover);
+}
+
+/* --- Projects Section --- */
+.projects-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 24px;
+}
+
+.project-card {
+    background: linear-gradient(135deg, rgba(21, 33, 58, 0.8) 0%, rgba(30, 41, 59, 0.6) 100%);
+    padding: 24px;
+    border-radius: 12px;
+    border: 1px solid rgba(14, 165, 233, 0.2);
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+}
+
+.project-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(14, 165, 233, 0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.project-card:hover {
+    transform: scale(1.05) translateY(-12px);
+    border-color: var(--accent-color);
+    box-shadow: 0 20px 40px rgba(14, 165, 233, 0.2), 0 0 60px rgba(14, 165, 233, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.project-card:hover::after {
+    opacity: 1;
+}
+
+.project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 12px;
+    gap: 12px;
+}
+
+.project-header h3 {
+    font-size: 1.2rem;
+    color: var(--text-primary);
+    flex: 1;
+}
+
+.project-status {
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    font-weight: 600;
+}
+
+.status-In\ Progress {
+    background-color: rgba(253, 224, 71, 0.2);
+    color: #fde047;
+}
+
+.status-Completed {
+    background-color: rgba(34, 197, 94, 0.2);
+    color: #22c55e;
+}
+
+.status-Planned {
+    background-color: rgba(59, 130, 246, 0.2);
+    color: #3b82f6;
+}
+
+.project-short {
+    font-size: 1rem;
+    color: var(--text-primary);
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.project-detail {
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+    line-height: 1.6;
+}
+
+.tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.tech-badge {
+    background-color: rgba(14, 165, 233, 0.1);
+    color: var(--accent-color);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    border: 1px solid rgba(14, 165, 233, 0.3);
+}
+
+.project-links {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-small {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    background-color: var(--accent-color);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.btn-small:hover {
+    background-color: var(--accent-hover);
+    transform: translateY(-2px);
+}
+
+/* --- Skills Section --- */
+.skills-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 32px;
+}
+
+.skill-category {
+    background: linear-gradient(135deg, rgba(21, 33, 58, 0.8) 0%, rgba(30, 41, 59, 0.6) 100%);
+    padding: 24px;
+    border-radius: 12px;
+    border: 1px solid rgba(14, 165, 233, 0.2);
+    backdrop-filter: blur(10px);
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.skill-category:hover {
+    transform: scale(1.05);
+    border-color: var(--accent-light);
+    box-shadow: 0 20px 40px rgba(6, 182, 212, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.skill-category h4 {
+    font-size: 1.1rem;
+    color: var(--accent-color);
+    margin-bottom: 16px;
+}
+
+.skill-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.skill-item {
+    background: linear-gradient(135deg, rgba(14, 165, 233, 0.15) 0%, rgba(6, 182, 212, 0.1) 100%);
+    color: var(--text-primary);
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1px solid rgba(14, 165, 233, 0.4);
+    font-size: 0.95rem;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.skill-item::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.skill-item:hover {
+    background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-light) 100%);
+    color: #fff;
+    border-color: var(--accent-light);
+    transform: scale(1.12) translateY(-3px);
+    box-shadow: 0 10px 25px rgba(14, 165, 233, 0.3);
+}
+
+.skill-item:hover::before {
+    opacity: 1;
+}
+
+/* --- Footer --- */
+footer {
+    text-align: center;
+    padding: 24px 0;
+    color: var(--text-secondary);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* --- 簡單淡入動畫 (由 JS 觸發) --- */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- RWD 響應式設計 (手機版) --- */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .hero-actions {
+        flex-direction: column;
+    }
+    
+    .btn {
+        text-align: center;
+        width: 100%;
+    }
+    
+    .nav-links {
+        display: none; /* 手機版最簡單的作法先隱藏導覽列文字，保留 Brand */
+    }
+}

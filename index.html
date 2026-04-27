@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | AI & Hardware Engineering</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="nav-brand">Portfolio.</div>
+            <ul class="nav-links">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <section id="hero" class="section hero-section fade-in">
+            <div class="container">
+                <h1 class="hero-title">你好，我是 <span class="text-highlight">[張權耀123]</span></h1>
+                <p class="hero-subtitle">專注於 AI 生醫訊號處理與 FPGA 硬體設計的電機工程學生</p>
+                <div class="hero-actions">
+                    <a href="#about" class="btn btn-primary">View Work</a>
+                    <a href="#contact" class="btn btn-outline">Contact Me</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="section about-section fade-in">
+            <div class="container">
+                <h2 class="section-title">About Me</h2>
+                <div class="about-content">
+                    <p>我是一名電機系大三學生，致力於探索軟硬體整合的無限可能。目前專注於深度學習演算法開發，特別是非接觸式生理訊號 (rPPG) 的萃取與分析。同時，我也具備使用 Verilog 進行 FPGA (如 EGO1) 硬體設計的實戰經驗。</p>
+                    <br>
+                    <p>我相信紮實的學術理論與落地的工程實作同等重要。透過參與智慧感測與互動技術競賽，我持續鍛鍊自己解決複雜系統問題的能力，期望未來能在 AI 與硬體整合領域貢獻價值。</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="courses" class="section courses-section fade-in">
+            <div class="container">
+                <h2 class="section-title">Courses</h2>
+                <div class="courses-list" id="courses-list"></div>
+            </div>
+        </section>
+
+        <section id="projects" class="section projects-section fade-in">
+            <div class="container">
+                <h2 class="section-title">Projects</h2>
+                <div class="projects-list" id="projects-list"></div>
+            </div>
+        </section>
+
+        <section id="skills" class="section skills-section fade-in">
+            <div class="container">
+                <h2 class="section-title">Skills</h2>
+                <div class="skills-list" id="skills-list"></div>
+            </div>
+        </section>
+
+        <section id="contact" class="section contact-section fade-in">
+            <div class="container">
+                <h2 class="section-title">Contact</h2>
+                <p class="contact-desc">準備好聊聊新的專案或機會了嗎？歡迎透過以下方式聯繫我。</p>
+                <div class="contact-cards">
+                    <a href="mailto:your.email@example.com" class="card">
+                        <span class="card-icon">✉️</span>
+                        <span class="card-text">Email</span>
+                    </a>
+                    <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" class="card">
+                        <span class="card-icon">💻</span>
+                        <span class="card-text">GitHub</span>
+                    </a>
+                    <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer" class="card">
+                        <span class="card-icon">🔗</span>
+                        <span class="card-text">LinkedIn</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="current-year"></span> [你的姓名]. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- 自定義游標元素 -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
